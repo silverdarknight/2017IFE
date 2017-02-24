@@ -11,7 +11,8 @@
 			.container{
 				margin:10px auto;
 				text-align: center;
-				width:80%;
+				width:90%;
+				height:1000px;
 				line-height: 120px;
 				border:solid 1px gray;
 				border-radius: 3px;
@@ -86,7 +87,8 @@
 						else{
 							this.El.style.left = x+'px';
 						}
-						this.El.style.top = y+'px';
+						if(winY-y<60) this.El.style.top = y-60+'px';
+						else this.El.style.top = y+'px';
 						document.body.appendChild(this.El);
 					}.bind(this), false);
 					document.body.addEventListener('click', function(e){
