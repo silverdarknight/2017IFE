@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+	</head>
+
+	<body>
+		<div class="container">
+			<input type="text" id="reg"/>
+			<button class="pn">检测是否符合手机号</button>
+			<button class="reword">检测是否有相邻重复单词</button>
+			<span id="regAns"></span>
+		</div>
+		<script type="text/javascript">
+			var msgEl = document.getElementById('regAns');
+			function matchRegPn(){
+				var pn = /^1[3|4|5|7|8]\d{9}/g;
+				var val = document.getElementById('reg').value;
+				if(pn.test(val)) msgEl.innerText = '符合手机号！';
+				else msgEl.innerText = '不符合手机号';
+			}
+			function matchRegRe(){
+				var re = /\b([a-zA-Z]+)\s+\1\b/i;
+				var val = document.getElementById('reg').value;
+				if(re.test(val)) msgEl.innerText = '符合！';
+				else msgEl.innerText = '不符合';
+			}
+
+			document.getElementsByClassName('pn')[0].addEventListener('click', matchRegPn, false);
+			document.getElementsByClassName('reword')[0].addEventListener('click', matchRegRe, false);
+		</script>
+		<!--script type="text/javascript" src="../scripts/jquery.js"></script-->
+	</body>
+</html>
