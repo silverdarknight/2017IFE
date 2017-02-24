@@ -43,7 +43,12 @@
 				height: 17px;
 				line-height: 17px;
 			}
+			label{
+				position: relative;
+				left:-17px;
+			}
 			#beforeCheckBox,label:before{
+				
 				content: ''; /* non-break space */
 				display: inline-block;
 				width:17px;
@@ -74,7 +79,6 @@
 		<input type="checkbox" id="beforeCheckBox" /><label for='beforeCheckBox'>xx</label>
 		<!--script type="text/javascript" src="../scripts/jquery.js"></script-->
 		<script type="text/javascript">
-			//var checkbox_checked = false;
 			document.getElementById('checkbox_bg').addEventListener('click', function(e){
 				if(e.target.checked) e.target.parentNode.className+='  checkBox_checked';
 				else e.target.parentNode.className = 'bgCheckBoxOut';

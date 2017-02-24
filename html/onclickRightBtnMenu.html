@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			body{
+				position: relative;
+			}
+			.container{
+				margin:10px auto;
+				text-align: center;
+				width:80%;
+				line-height: 120px;
+				border:solid 1px gray;
+				border-radius: 3px;
+				background-color: #F2F2F2;
+				box-shadow: 0px 2px 1px 2px #BFBFBF;
+				font-size: 30px;
+				font-family: 'Microsoft Yahei',Serif;
+			}
+			.rightBtnArea{
+				position: absolute;
+				top:0px;
+				left:0px;
+				width:220px;
+				height:60px;
+				border:solid 1px gray;
+				border-radius: 5px;
+				box-shadow: 0px 2px 1px 2px #BFBFBF;
+				background-color: white;
+				font-size: 25px;
+				display: flex;
+				flex-direction:column;
+			}
+			.rightBtnArea_line{
+				padding-left: 20px;
+				line-height: 30px;
+			}
+			.rightBtnArea_line:hover{
+				color:white;
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<span>click here!</span>
+		</div>
+		<!--script type="text/javascript" src="../scripts/jquery.js"></script-->
+		<script type="text/javascript">
+			var rightBtnComponent = function(){
+				this.El = '';
+				this.createMenu = function(){
+					var menu = document.createElement('div');
+					var menuLine1 = document.createElement('div');
+					var menuLine2 = document.createElement('div');
+
+					menuLine1.innerText = 'menuItem1';
+					menuLine2.innerText = 'menuItem2';
+
+					menuLine1.className = 'rightBtnArea_line';
+					menuLine2.className = 'rightBtnArea_line';
+					menu.className = 'rightBtnArea';
+					menu.appendChild(menuLine1);
+					menu.appendChild(menuLine2);
+					this.El = menu;
+					return menu;
+				}
+				this.bindEvent = function(){
+					document.getElementsByClassName('container')[0].addEventListener('contextmenu', function(e){
+						console.log(this);
+						for(var i=0;i<document.getElementsByClassName('rightBtnArea').length;i++){
+							document.body.removeChild(document.getElementsByClassName('rightBtnArea')[i]);
+						}
+						e.returnValue = false;//屏蔽原来的右键菜单
+						var x = e.clientX;
+						var y = e.clientY;
+						var winX = window.innerWidth;
+						var winY = window.innerHeight;
+						if(winX-x<220){
+							this.El.style.left = x-220+'px';
+						}
+						else{
+							this.El.style.left = x+'px';
+						}
+						this.El.style.top = y+'px';
+						document.body.appendChild(this.El);
+					}.bind(this), false);
+					document.body.addEventListener('click', function(e){
+						for(var i=0;i<document.getElementsByClassName('rightBtnArea').length;i++){
+							document.body.removeChild(document.getElementsByClassName('rightBtnArea')[i]);
+						}
+						e.stopPropagation();
+					}, true);
+				}
+				this.init =function(){
+					this.createMenu();
+					this.bindEvent();
+				}
+				this.init();
+			}
+			var rightBtn = new rightBtnComponent();
+		</script>
+	</body>
+</html>
