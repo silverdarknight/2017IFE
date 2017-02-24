@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+		body{
+			background-color: gray;
+		}
+			input{
+				display: inline-block;
+				margin: 0px;
+				width:17px;
+				height:17px;
+			}
+			.bgCheckBox,.bgRadio{
+				opacity: 0;
+			}
+			.bgRadioOut,.bgCheckBoxOut{
+				width:17px;
+				height:17px;
+				background: url('../img/myCheckBoxRadio.png') no-repeat;
+			}
+			.bgCheckBoxOut{
+				background-position: -24px -32px;
+			}
+			.checkBox_checked{
+				background-position: -58px -32px !important;
+			}
+			.bgRadioOut{
+				background-position: -24px -9px;
+			}
+			.radio_checked{
+				background-position: -58px -9px !important;
+			}
+
+			#beforeCheckBox{
+				opacity: 0;
+			}
+			label{
+				display: inline-block;
+				height: 17px;
+				line-height: 17px;
+			}
+			#beforeCheckBox,label:before{
+				content: ''; /* non-break space */
+				display: inline-block;
+				width:17px;
+				height:17px;
+				background: url('../img/myCheckBoxRadio.png') no-repeat;
+				background-position: -24px -32px;
+			}
+			#beforeCheckBox:checked+label:before{
+				background-position: -58px -32px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="bgCheckBoxOut">
+			<input type="checkbox" id="checkbox_bg" class="bgCheckBox" />
+		</div>
+		<div class="bgCheckBoxOut checkBox_checked">
+			<input type="checkbox" class="bgCheckBox" />
+		</div>
+		<div class="bgRadioOut">
+			<input type="radio" id="checkbox_bg" name="bgradio" class="bgRadio" />
+		</div>
+		<div class="bgRadioOut">
+			<input type="radio" name="bgradio" class="bgRadio" />
+		</div>
+
+		<input type="checkbox" id="beforeCheckBox" /><label for='beforeCheckBox'>xx</label>
+		<!--script type="text/javascript" src="../scripts/jquery.js"></script-->
+		<script type="text/javascript">
+			//var checkbox_checked = false;
+			document.getElementById('checkbox_bg').addEventListener('click', function(e){
+				if(e.target.checked) e.target.parentNode.className+='  checkBox_checked';
+				else e.target.parentNode.className = 'bgCheckBoxOut';
+			}, false);
+			for(var i=0;i<document.getElementsByName('bgradio').length;i++){
+				document.getElementsByName('bgradio')[i].addEventListener('click',function(e){
+					for(var j=0;j<document.getElementsByName('bgradio').length;j++){
+						document.getElementsByName('bgradio')[j].parentNode.className = 'bgRadioOut';
+					}
+					e.target.parentNode.className+='  radio_checked';
+				},false);
+			}
+		</script>
+	</body>
+</html>
