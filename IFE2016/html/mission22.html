@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.treeNode{
+				background-color: white;
+				border:solid 1px black;
+				margin-right: 10px;
+				padding:15px 20px;
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:stretch;
+			}
+			.seeing{
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<button id="see">遍历</button>
+			<div class="treeNode">
+				<div class="treeNode">
+					<div class="treeNode"></div>
+					<div class="treeNode"></div>
+				</div>
+				<div class="treeNode">
+					<div class="treeNode"></div>
+					<div class="treeNode"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var nodeItems = [];
+			function getChildNode(node){
+				var ans = [];
+				if(node.childNodes.length !== 0){
+					for(var i=0;i<node.childNodes.length;i++){
+						if(node.childNodes[i].nodeType == 1) ans.push(node.childNodes[i]);
+					}
+					//console.log(ans);
+					return ans;
+				}
+				else return false;
+			}
+			function forNode(node){
+				var childs = getChildNode(node);
+				if(childs){
+					forNode(childs[0]);
+					nodeItems.push(node);console.log(childs);console.log(node);
+					forNode(childs[1]);
+				}
+				else {
+					nodeItems.push(node);
+				}
+			}
+			function clearColor(node){
+				//console.log('clear color start');
+				var childs = getChildNode(node);
+				if(childs){
+					clearColor(childs[0]);
+					node.style.backgroundColor = 'white';
+					clearColor(childs[1]);
+				}
+				else {
+					node.style.backgroundColor = 'white';
+				}
+				//console.log('clear color finish');
+			}
+			function setColor(){
+				var i = 0;
+				var timer = setInterval(function(){
+					nodeItems[i].style.backgroundColor = 'blue';
+					if(i != 0) nodeItems[i-1].style.backgroundColor = 'white';
+					i++;
+					if(i == nodeItems.length) {clearInterval(timer);setTimeout('clearColor(fatherNode);', 500);}
+				}, 500);
+				
+			}
+			function init(){
+				nodeItems = [];
+				clearColor(fatherNode);
+				forNode(fatherNode);
+				setColor();
+			}
+			var fatherNode = document.querySelectorAll('.container>.treeNode')[0];
+			document.getElementsByTagName('button')[0].addEventListener('click', init, false);
+		</script>
+	</body>
+</html>

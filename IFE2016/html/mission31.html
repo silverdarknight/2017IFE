@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.container form{
+				width:800px;
+			}
+			.radioSet{
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:space-around;
+				align-items:stretch;
+			}
+			.radioSelectArea{
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:space-between;
+				align-items:stretch;
+			}
+			.radioSelectArea span{
+				margin-right: 10px;
+			}
+			.radioSelectArea select,.radioSelectArea input{
+				margin-left: 20px;
+				flex-grow:1;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<form action="" method="post">
+				<div class="radioSet">
+					<div><input type="radio" checked="checked" name="from" /><span>在校生</span></div>
+					<div><input type="radio" name="from" /><span>非在校生</span></div>
+				</div>
+				<div class="radioSelectArea">
+					<span>学校</span>
+					<select name="province" onchange="provinceChange()">
+						<option value="北京">北京</option>
+					</select>
+					<select name="graduateSchool">
+						<option value="北京大学">北京大学</option>
+					</select>
+				</div>
+				<div class="radioSelectArea">
+					<span>就职单位</span>
+					<input type="text" name="workingPlace" />
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			var data = {
+				'北京':[
+					'北京大学',
+					'清华大学'
+				],
+				'上海':[
+					'上海交大',
+					'xx大学'
+				]
+			};
+			function bindRadio(){
+				var radioSelects = document.getElementsByName('from');
+				for(var i=0;i<radioSelects.length;i++){
+					radioSelects[i].addEventListener('change', function(){
+						radioChange();
+					}, false);
+				}
+			}
+			function radioChange(){
+				var radioSelects = document.getElementsByName('from'),radioArea = document.getElementsByClassName('radioSelectArea');
+				for(i=0;i<radioSelects.length;i++){
+					if(radioSelects[i].checked) radioArea[i].style.display = 'flex';
+					else radioArea[i].style.display = 'none';
+				}
+			}
+			function provinceChange(){
+				var province = document.getElementsByName('province')[0],school = document.getElementsByName('graduateSchool')[0],i,currentProvince=province.value,h='';
+				for(i=0;i<data[currentProvince].length;i++){
+					h += '<option value="'+data[currentProvince][i]+'">'+data[currentProvince][i]+'</option>';
+				}
+				school.innerHTML = h;
+			}
+			function init(){
+				var province = document.getElementsByName('province')[0],school = document.getElementsByName('graduateSchool')[0],currentProvince,i,h='';
+				for(i in data){
+					h+='<option value="'+i+'">'+i+'</option>';
+					if(!currentProvince) currentProvince = i;
+				}
+				province.innerHTML = h;
+				h = '';
+				console.log(data[currentProvince],province.value);
+				for(i=0;i<data[currentProvince].length;i++){
+					h += '<option value="'+data[currentProvince][i]+'">'+data[currentProvince][i]+'</option>';
+				}
+				school.innerHTML = h;
+				radioChange();
+				bindRadio();
+			}
+			init();
+		</script>
+	</body>
+</html>

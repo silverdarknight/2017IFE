@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.boxContent{
+				overflow: hidden;
+			}
+			.box{
+				line-height: 25px;
+				text-align: center;
+				color:white;
+				font-size: 18px;
+				padding:0 5px;
+				float: left;
+				margin: 10px;
+				background-color: #C6E2FF;
+			}
+			.box:hover{
+				background-color: red;
+				color:white;
+			}
+			.blue{
+				color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="container">
+				<div id="top">
+					<div>
+						<span>Tag: <input type="text" /> <button id="insert">Insert</button></span>
+					</div>
+					<div class="boxContent"></div>
+				</div>
+				<div id="bot">
+					<textarea id="in"></textarea><br>
+					<button id="insert">Insert</button>
+					<div class="boxContent"></div>
+				</div>
+			</div>
+			
+		</div>
+		<script type="text/javascript">
+			var data = [],love=[];
+
+			//通过window.data生成div.box
+			function createBoxs(el,arr){
+				var h = '';
+				for(var i = 0;i<arr.length;i++){
+					h+='<div class="box">'+arr[i]+'</div>';
+				}
+				el.innerHTML = h;
+			}
+
+			function delData(d){
+				for(var i=0;i<data.length;i++){
+					if(data[i] == d) {
+						data.splice(i,1);
+						break;
+					}
+				}
+			}
+			//去重
+			function delRepeat(a){
+				function dataInArray(d,a){
+					for(var i=0;i<a.length;i++)
+						if(d == a[i]) return true;
+					return false;
+				}
+				var ans=[];
+				for(var i=0;i<a.length;i++){
+					if(!dataInArray(a[i],ans)) ans.push(a[i]);
+				}
+				return ans;
+			}
+			function bindEvent(){
+				document.getElementById('top').addEventListener('click',function(e){
+					//console.log(this);
+					var inputEl = this.getElementsByTagName('input')[0];
+					var val = inputEl.value;
+
+					if(e.target.nodeName.toLowerCase() == 'button'){
+						inputEl.value = '';
+						data.push(val.trim());
+						createBoxs(this.getElementsByClassName('boxContent')[0],data);
+					}
+					if(e.target.className == 'box'){
+						console.log('delete');
+						var targetText = e.target.innerText;
+						delData(targetText.replace('点击删除',''));
+						createBoxs(this.getElementsByClassName('boxContent')[0],data);
+					}
+				},false);
+
+				//box mouseOver and Out
+				document.addEventListener('mouseover',function(e){
+					if(e.target.className == 'box'){
+						console.log('mouseover');
+						var target = e.target;
+						var targetText = target.innerText;
+						target.innerText = '点击删除'+targetText;
+					}
+				},false);
+				document.addEventListener('mouseout',function(e){
+					if(e.target.className == 'box'){
+						console.log('mouseout');
+						var target = e.target;
+						var targetText = target.innerText;
+						target.innerText = targetText.replace('点击删除','');
+					}
+				},false);
+
+
+				document.getElementById('bot').addEventListener('click',function(e){
+					//console.log(this);
+					var targetText = this.getElementsByTagName('textarea')[0];
+					var val = targetText.value;
+					re = /[0-9a-zA-Z\u4e00-\u9fa5]+/g;
+					if(e.target.id=='insert'){
+						console.log(delRepeat([1,2,1,3]));
+						var inNode = delRepeat(val.match(re));
+						for(var i=0;i<inNode.length;i++){
+							love.push(inNode[i]);
+						}
+						createBoxs(this.getElementsByClassName('boxContent')[0],love);
+					}
+				},false);
+				/*
+				document.addEventListener('click', function(e){
+					var val = document.getElementById('in').value;
+					document.getElementById('in').value = '';
+					if(e.target.nodeName.toLowerCase() == 'button'){
+						if(e.target.id == 'insert'){
+							re = /[0-9a-zA-Z\u4e00-\u9fa5]+/g;
+							console.log(val.match(re));
+							var inNode = val.match(re);
+							for(var i=0;i<inNode.length;i++){
+								data.push(inNode[i]);
+							}
+							
+						}
+						else if(e.target.id == 'check'){
+							var boxCon = document.getElementsByClassName('boxContent')[0];
+							var re = new RegExp(val, 'g');
+							for(var j=0;j<data.length;j++){
+								data[j] = data[j].replace(re,'<span class="blue">'+val+'</span>');
+							}
+						}
+						createBoxs();
+					}
+				}, false);*/
+
+			}
+			function init(){
+				bindEvent();
+			}
+
+			init();	
+		</script>
+	</body>
+</html>

@@ -1,0 +1,145 @@
+.articalList{
+	width:80%;
+	margin:80px auto;
+	padding:100px 0;
+}
+			.articalList span{
+				display: inline-block;
+			}
+			.articalList .articalList_title{
+				position: relative;
+				height: 30px;
+				padding:0px 5% 0 0;
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:center;
+			}
+			.articalList .articalList_title button{
+				position: absolute;
+				right:5%;
+				line-height: 24px;
+				background-color: #FF8C00;
+				border:solid 2px #EE7621;
+				border-radius: 3px;
+				outline: none;
+				color:white;
+			}
+			.articalList .articalList_radioArea{
+				position: relative;
+				width:5%;
+				height: 100%;
+			}
+			.articalList .articalList_radioArea>input{
+				position: absolute;
+				top:50%;
+				left:50%;
+				margin-left: -8px;
+				margin-top: -8px;
+				width:16px;
+				height:16px;
+			}
+			.articalList .articalList_titleArea{
+				width:30%;
+			}
+			.articalList .articalList_timeArea{
+				width: 20%;
+			}
+			.articalList .articalList_stateArea{
+				width: 15%;
+			}
+			.articalList .articalList_actionArea{
+				width: 15%;
+			}
+
+			.articalList>ul{
+				background-color: white;
+				padding:0px;
+			}
+			.articalList>ul hr{
+				width:97%;
+				margin:0px auto;
+			}
+			.articalList>ul>li{
+				position: relative;
+				padding-right: 5%;
+				height:60px;
+				display: flex;
+				flex-direction:row;
+				justify-content:flex-start;
+				align-items:center;
+			}
+			.articalList>ul>li:hover{
+				background-color: #FFF0F5;
+			}
+
+			.articalList>ul>li button{
+				width:80px;
+				line-height: 20px;
+				border:solid 1px #555555;
+				border-radius: 3px;
+				background-color: white;
+				color:#555555;
+			}
+			.articalList .changeBtns{
+				position: absolute;
+				right:5%;
+			}
+			.articalList .choseBtn{
+				background-color: #FF8C00 !important;
+				color:white !important;
+				border:solid 1px #EE7621 !important;
+				cursor: pointer;
+			}
+			.articalList .delAllArea{
+				height:60px;
+				display: flex;
+				flex-direction:row;
+				justify-content:flex-start;
+				align-items:center;
+				background-color: white;
+				padding-bottom: 65px;
+			}
+			.articalList .delAllBtn{
+				margin-left: 20px;
+				width:80px;
+				line-height: 20px;
+				border:solid 1px #555555;
+				border-radius: 3px;
+				background-color: white;
+				color:#555555;
+			}
+
+			.articalList .newArtical{
+				height:320px;
+				background-color: white;
+				border-radius: 5px;
+				box-shadow: 0px 2px 3px 1px gray;
+				position: relative;
+			}
+			.articalList .newArtical>button{
+				display: block;
+				width:190px;
+				height:50px;
+				text-align: center;
+				line-height: 44px;
+				color:white;
+				background-color: #FF8C00;
+				font-size: 25px;
+				border:solid 2px #EE7621;
+				border-radius: 3px;
+				position: absolute;
+				top:50%;
+				left: 50%;
+				margin-top: -25px;
+				margin-left: -95px;
+			}
+			.articalList .inLine{
+				color:green;
+			}
+.stopTime{
+	display:flex;
+	flex-direction:row;
+	
+}

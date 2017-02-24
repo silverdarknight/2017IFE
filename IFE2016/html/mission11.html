@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximun-scale=1" />
+		<style type="text/css">
+			body{
+				font-family: "黑体","Microsoft Yahei",Serif;
+				color:black;
+				font-size: 23px;
+				margin: 0px;
+				min-width: 257px;
+			}
+			p{
+				margin:0px;
+			}
+			hr{
+				border:none;
+				background-color: #C5C1AA;
+			}
+			.hrRow{
+				width:95%;
+				height:2px;
+			}
+			.hrCol{
+				width:2px;
+			}
+			.hrNomargin{
+				margin:0px;
+			}
+			@media screen and (max-width:1080px){
+				.nav{
+					width: 100%;
+				}
+				.navtitle{
+					height:100%;
+					text-align: center;
+					line-height: 100%;
+					box-sizing:border-box;
+					font-size: 1.5em;
+					padding:0.5em;
+					background-color: #B0E0E6;
+					color:white;
+				}
+				.navtitle>div{
+					position: relative;					
+				}
+				.navtitle>div>a{
+					font-size: 0.8em;
+					text-decoration: none;
+					color:white;
+					position: absolute;
+					top:0px;
+					left:0px;
+					display: table;
+				}
+				.navtitle>div>a>span{
+					display: table-cell;
+					vertical-align: middle;
+				}
+				.navtitle>div>a>span:first-child{
+					font-size: 1.5em;
+				}
+				.navguide{
+					color:#636363;
+					overflow: hidden;
+				}
+				.guide{
+					float: left;
+					width:20%;
+					height:1em;
+					padding:1em 0em 1em;
+					text-align: center; 
+					border-bottom: solid 5px white; 
+				}
+				.guide:hover{
+					border-bottom: solid 5px #B0E0E6; 
+				}
+				.titleImg{
+					width:100%;
+					background: url("../img/mission11/titleImg.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.titleImg:before{
+					content: '';
+					display: block;
+					padding-bottom: 60%;
+				}
+				.targetArea{
+					overflow: hidden;
+				}
+				.target{
+					width:20%;
+					float: left;
+					display: flex;
+					justify-content:center;
+				}
+				.targetContain{
+					width:60%;
+					display: inline-block;
+					text-align: center;
+					margin-bottom:18.7%;
+				}
+				.targetImg{
+					width:100%;
+					margin: 37.5% 0px;
+				}
+				.targetImg:before{
+					content:'';
+					display: block;
+					padding-bottom: 100%;
+					background-color: #B0E0E6;
+					border-radius: 50%;
+				}
+				
+				.itemArea{
+					overflow: hidden;
+					display: flex;
+				}
+				.itemArea>div,.itemArea>hr{
+					float: left;
+				}
+				.item{
+					width:33%;
+					display: flex;
+					flex-direction:column;
+					align-items:center;
+					margin-top: 5%;
+					margin-bottom: 5%;
+					box-sizing:border-box;
+				}
+				.item>span:nth-child(2){
+					font-size: 1.5em;
+					line-height: 1.2em;
+				}
+				.item>span:last-child{
+					color:#AAAAAA;
+				}
+				.itemImg{
+					width:80%;
+				}
+				.itemImg:before{
+					content:'';
+					display: block;
+					padding-bottom: 120%;
+				}
+				.Gou{
+					width:100%;
+					height:1em;
+					background-color: #CFCFCF;
+				}
+				.model{
+					display: flex;
+					flex-direction:column;
+					align-items:stretch;
+					color:#6B6B6B;
+				}
+				.model>div,.model>hr{
+					margin-left: 2.5%;
+					margin-right: 2.5%;
+				}
+				.modelTitle{
+					font-size: 1.8em;
+					margin: 0.5em 0px;
+				}
+				.modelContent{
+					display:flex;
+					flex-direction:column;
+				}
+				.modelContentArticle{
+					display: flex;
+					flex-direction:row;
+					align-items:stretch;
+					justify-content:space-between;
+					margin:0.5em 0;
+				}
+				.modelContentArticleImg{
+					width:25%;
+					background: url("../img/mission11/model1Img.png") no-repeat;
+					background-size: 100% 100%;
+					border:solid 1px #FF8C00;
+					border-radius: 3px;
+				}
+				.modelContentArticleImg:before{
+					content: '';
+					padding-bottom: 100%;
+					display: block;
+				}
+				.modelContentArticletext{
+					width:72%;
+					display: flex;
+					flex-direction:column;
+					align-items:stretch;
+					justify-content:space-between;
+				}
+				.modelContentArticletext>div{
+					height:48%;
+					display: flex;
+					flex-direction:row;
+					flex-wrap: nowrap;
+					justify-content:space-between;
+				}
+				.modelContentArticletext>div>span{
+					display: inline-block;
+					width: 48%;
+					height:98%;
+					text-align: center;
+					background-color: #CCCCCC;
+				}
+				.articleArea{
+					display: flex;
+					flex-direction:column;
+					align-items:stretch;
+					color:#6B6B6B;
+				}
+				.article{
+					padding: 0.3em;
+					display:flex;
+				}
+				.article1{
+					flex-direction:row;
+				}
+				.article1>.articalImg{
+					width:30%;
+					margin-right: 2%;
+					background: url("../img/mission11/titleImg.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.article1>.articalImg:before{
+					content: '';
+					display: block;
+					padding-bottom: 60%;
+				}
+				.articalTitle{
+					font-size: 22px;
+				}
+				.textArea{
+					display: flex;
+					flex-direction:column;
+					justify-content:space-between;
+					width: 65%;
+				}
+				.articalDetail{
+					font-size: 18px;
+					color:#E5E5E5;
+				}
+				.articalDetail>span:first-child{
+					margin-right: 5px;
+				}
+				.articalDetail>span{
+					display: inline-block;
+				}
+				.article2{
+					flex-direction:column;
+					align-items:stretch;
+					justify-content:space-between;
+				}
+				.article2>.articalImgArea{
+					display: flex;
+					flex-direction:row;
+					justify-content:space-between;
+				}
+				.article2>.articalImgArea>.articalImg{
+					width:32%;
+					margin-right: 1%;
+					background: url("../img/mission11/titleImg.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.article2>.articalImgArea>.articalImg:before{
+					content: '';
+					display: block;
+					padding-bottom: 60%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="nav">
+				<div class="navtitle">
+					<div>
+						<a href="#"><span>&lt;</span><span>返回</span></a>
+						<p>这是标题</p>
+					</div>
+				</div>
+				<div class="navguide">
+					<div class="guide">导航</div>
+					<div class="guide">导航</div>
+					<div class="guide">导航</div>
+					<div class="guide">导航</div>
+					<div class="guide">导航</div>
+				</div>
+			</div>
+			<div class="titleImg"></div>
+			<div class="targetArea">
+				<div class="target">
+					<div class="targetContain">
+						<div class="targetImg"></div>
+						<p class="targetTitle">标签</p>
+					</div>
+				</div>
+				<div class="target">
+					<div class="targetContain">
+						<div class="targetImg"></div>
+						<div class="targetTitle">标签</div>
+					</div>
+				</div>
+				<div class="target">
+					<div class="targetContain">
+						<div class="targetImg"></div>
+						<div class="targetTitle">标签</div>
+					</div>
+				</div>
+				<div class="target">
+					<div class="targetContain">
+						<div class="targetImg"></div>
+						<div class="targetTitle">标签</div>
+					</div>
+				</div>
+				<div class="target">
+					<div class="targetContain">
+						<div class="targetImg"></div>
+						<div class="targetTitle">标签</div>
+					</div>
+				</div>
+			</div>
+			<hr class="hrRow">
+			<div class="itemArea">
+				<div class="item">
+					<div class="itemImg"></div>
+					<span>分栏一</span>
+					<span>分栏小标题</span>
+				</div>
+				<hr class="hrCol">
+				<div class="item">
+					<div class="itemImg"></div>
+					<span>分栏一</span>
+					<span>分栏小标题</span>
+				</div>
+				<hr class="hrCol">
+				<div class="item">
+					<div class="itemImg"></div>
+					<span>分栏一</span>
+					<span>分栏小标题</span>
+				</div>
+			</div>
+			<div class="Gou"></div>
+			<div class="model">
+				<div class="modelTitle">模块一</div>
+				<hr class="hrRow hrNomargin">
+				<div class="modelContent">
+					<div class="modelContentArticle">
+						<div class="modelContentArticleImg"></div>
+						<div class="modelContentArticletext">
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+						</div>
+					</div>
+					<div class="modelContentArticle">
+						<div class="modelContentArticleImg"></div>
+						<div class="modelContentArticletext">
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="Gou"></div>
+			<div class="model">
+				<div class="modelTitle">模块二</div>
+				<hr class="hrRow hrNomargin">
+				<div class="modelContent">
+					<div class="modelContentArticle">
+						<div class="modelContentArticleImg"></div>
+						<div class="modelContentArticletext">
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+						</div>
+					</div>
+					<div class="modelContentArticle">
+						<div class="modelContentArticleImg"></div>
+						<div class="modelContentArticletext">
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+							<div>
+								<span>这是文案</span>
+								<span>这是文案</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="Gou"></div>
+			<div class="articleArea">
+				<div class="article article1">
+					<div class="articalImg"></div>
+					<div class="textArea">
+						<p class="articalTitle">这是文章标题字号22的文章标题文章标题</p>
+						<p class="articalDetail"><span>文章来源</span><span>7分钟</span></p>
+					</div>
+				</div>
+				<hr class="hrRow">
+				<div class="article article1">
+					<div class="articalImg"></div>
+					<div class="textArea">
+						<p class="articalTitle">这是文章标题字号22的文章标题文章标题</p>
+						<p class="articalDetail"><span>文章来源</span><span>7分钟</span></p>
+					</div>
+				</div>
+				<hr class="hrRow">
+				<div class="article article2">
+					<p class="articalTitle">这是文章标题字号22的文章标题文章标题</p>
+					<div class="articalImgArea">
+						<div class="articalImg"></div>
+						<div class="articalImg"></div>
+						<div class="articalImg"></div>
+					</div>
+					<p class="articalDetail"><span>文章来源</span><span>7分钟</span></p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../scripts/jquery.js"></script>
+	</body>
+</html>

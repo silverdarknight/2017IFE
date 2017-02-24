@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.treeNode{
+				background-color: white;
+				border:solid 1px black;
+				margin-right: 10px;
+				padding:15px 20px;
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:stretch;
+			}
+			.seeing{
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<button id="delete">delete</button><button id="add">add</button><input type="text" />
+			<div class="treeNode">
+				<div class="treeNode">
+					<div class="treeNode">
+						<div class="treeNode"></div>
+						<div class="treeNode"></div>
+					</div>
+					<div class="treeNode"></div>
+				</div>
+				<div class="treeNode">
+					<div class="treeNode"></div>
+					<div class="treeNode">
+						<div class="treeNode"></div>
+						<div class="treeNode"></div>
+					</div>
+					<div class="treeNode"></div>
+					<div class="treeNode"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var nodeItems = [];
+			function seeing(node){
+				console.log('seeing');
+				node.style.backgroundColor = 'blue';
+			}
+			function leaving(node){
+				console.log('leaving');
+				if(node !== undefined) node.style.backgroundColor = 'white';
+			}
+			function getChildNode(node){
+				var ans = [];
+				if(node.childNodes.length !== 0){
+					for(var i=0;i<node.childNodes.length;i++){
+						if(node.childNodes[i].nodeType == 1) ans.push(node.childNodes[i]);
+					}
+					//console.log(ans);
+					return ans;
+				}
+				else return false;
+			}
+			function forNode(node){
+				var childs = getChildNode(node);
+				if(childs){
+					for(var i =0;i<childs.length;i++){
+						forNode(childs[i]);
+					}
+					nodeItems.push(node);
+				}
+				else {
+					nodeItems.push(node);
+				}
+			}
+			function choseNode(node){
+				leaving(fatherNode);
+				fatherNode = node;
+				seeing(fatherNode);
+			}
+			function init(){
+				nodeItems = [];
+				//clearColor(fatherNode);
+				forNode(fatherNode);
+				//setColor();
+			}
+			var fatherNode = document.querySelectorAll('.container>.treeNode')[0];
+			fatherNode.addEventListener('click',function(e){
+				if(e.target.className == 'treeNode'){
+					//console.log(e.target);
+					choseNode(e.target);
+				}
+			},false)
+			document.getElementsByTagName('button')[0].addEventListener('click', init, false);
+			document.getElementById('delete').addEventListener('click', function(e){
+				fatherNode.parentNode.removeChild(fatherNode);
+			}, false);
+			document.getElementById('add').addEventListener('click', function(e){
+				var val = document.getElementsByTagName('input')[0].value;
+				var h = '<div class="treeNode">'+val+'</div>';
+				fatherNode.innerHTML+=h;
+			},false);
+		</script>
+	</body>
+</html>

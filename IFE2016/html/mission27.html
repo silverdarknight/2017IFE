@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.planet{
+				width:200px;
+				height:200px;
+				background-color: gray;
+				position: absolute;
+				left:50%;
+				top:50%;
+				margin-left: -100px;
+				margin-top: -100px;
+				border-radius: 50%;
+			}
+			.spaceShip{
+				width:150px;
+				height:40px;
+				position: absolute;
+				top:50%;
+				left:50%;
+				margin-left: -75px;
+				margin-top: -180px;
+				background-color: blue;
+				text-align: center;
+				line-height: 40px;
+				color:white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="consoleArea">
+				<form id="add">		
+					速率30，消耗5:
+					<input type="radio"  checked="checked" name="power" value="30_5" />
+					速率50，消耗7:
+					<input type="radio" name="power" value="50_7" />
+					速率80，消耗9:
+					<input type="radio" name="power" value="80_9" />
+					<br/>
+					补充2:<input checked="checked" name='energy' type="radio" value='2' />
+					补充3:<input type="radio" name='energy' value='3' />
+					补充4:<input type="radio" name='energy' value='4' />
+					<br>
+					<div id='addBtn'>添加飞船</div>
+				</form>
+				<div class="control"></div>
+			</div>
+			<div class="planet"></div>
+		</div>
+		<script type="text/javascript" src="../scripts/jquery.js"></script>
+		<script type="text/javascript" src='../scripts/jquery.rotate.min.js'></script>
+		<script type="text/javascript" src="../scripts/mission27.js"></script>
+	</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.treeNode{
+				line-height: 20px;
+				font-size: 17px;
+				margin-right: 10px;
+				padding:2px 0px 2px 10px;
+				display: flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:flex-start;
+			}
+			.treeNode_title{
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:center;
+			}
+			.direction-none{
+				width:0px;
+				height:0px;
+			}
+			.direction-right{
+				width: 0px;
+				height:0px;
+				border-top:5px solid rgba(1,1,1,0);
+				border-right:none;
+				border-bottom:5px solid rgba(1,1,1,0);
+				border-left:12px solid black;
+				margin-right: 5px;
+			}
+			.direction-bot{
+				width: 0px;
+				height:0px;
+				border-top:12px solid black;
+				border-right:5px solid rgba(1,1,1,0);
+				border-bottom:none;
+				border-left:5px solid rgba(1,1,1,0);
+				margin-right: 5px;
+			}
+			.seeing{
+				background-color: blue;
+			}
+			.hide{
+				display: none;
+			}
+			.chose>.treeNode_title{
+				color:white;
+				background-color: blue;
+			}
+			.chose>.treeNode_title>.direction-right{
+				border-left:12px solid white;
+			}
+			.chose>.treeNode_title>.direction-bot{
+				border-top:12px solid white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<button id="delete">delete</button><button id="add">add</button><input type="text" />
+			<div class="treeNodeContent"></div>
+		</div>
+		<script type="text/javascript">
+			var choseEl;
+			
+			var isNullObject = function(obj){
+				var isNull = true;
+				for(var i in obj){
+					isNull = false;
+					break;
+				}
+				return isNull;
+			}
+			var nodeTreeItem = function(text , parentNode){
+				this.child = [];
+				this.parent = parentNode ? parentNode : '';
+				this.currentNode = '';
+				this.visible = true;
+				this.childVisible = false;
+				this.title = text;
+				this.init();
+			};
+			nodeTreeItem.prototype = {
+				constructor:nodeTreeItem,
+				init:function(){
+					var outDiv = document.createElement('div');
+					outDiv.className = 'treeNode';//console.log(outDiv);
+					var nodeTitleDiv = document.createElement('div');
+					nodeTitleDiv.className = 'treeNode_title';
+					
+					var dire = document.createElement('span');
+					if(this.child.length != 0){
+						if(this.childVisible) dire.className = 'direction-bot';
+						else dire.className = 'direction-right';
+					}
+					else dire.className = 'direction-none';
+					var titleSpan = document.createElement('span');
+					titleSpan.innerText = this.title;
+					var treeNodeContainer = document.createElement('div');
+					addClass(treeNodeContainer,'treeNodeContainer');
+					if(!this.childVisible) addClass(treeNodeContainer,'hide');
+
+					nodeTitleDiv.appendChild(dire);
+					nodeTitleDiv.appendChild(titleSpan);
+					outDiv.appendChild(nodeTitleDiv);
+
+					for(var i=0;i<this.child.length;i++){
+						treeNodeContainer.appendChild(this.child[i].init());
+					}
+					outDiv.appendChild(treeNodeContainer);this.toggle(nodeTitleDiv);
+					this.currentNode = outDiv;//console.log(this);
+					return outDiv;
+				},
+				addChild:function(node){
+					node.parent = this;
+					node.init();
+					this.child.push(node);
+					//return this.init();
+					this.init();
+					return this;
+				},
+				delNode:function(){
+					for(var i=0;i<this.parent.child.length;i++){
+						if(this.parent.child[i] == this) {
+							this.parent.child.splice(i,1);
+							break;
+						}
+					}
+					this.parent.init();
+				},
+				toggle:function(node){
+					node.addEventListener('click',function(e){
+						if(choseEl != node.parentNode){
+							var choseList = document.getElementsByClassName('chose');
+							for(var i=0;i<choseList.length;i++){
+								delClass(choseList[i],'chose');
+							}
+							choseEl = node.parentNode;
+							addClass(choseEl,'chose');
+						}
+						
+						//console.log('click');
+						//console.log(node.nextSibling.className);
+						//console.log(clsInEl(node.nextSibling.className,'hide'));
+						if(node.childNodes[0].className != 'direction-none'){
+							if(clsInEl(node.nextSibling.className,'hide')){
+								//console.log('cancel hide');
+								delClass(node.nextSibling,'hide');
+								node.childNodes[0].className = 'direction-bot';
+								e.stopPropagation();
+							}
+							else{
+								//console.log('hide');
+								addClass(node.nextSibling,'hide');
+								node.childNodes[0].className = 'direction-right';
+								e.stopPropagation();
+							}
+						}
+							
+					},false);
+				},
+				render:function(el){
+					this.init();
+					el.innerHTML = '';
+					el.appendChild(this.currentNode);
+				},
+				findNode:function(el){
+					var childList = this.child,ans;
+					if(this.currentNode == el) return this;
+					else{
+						for(var i=0;i<childList.length;i++){
+							ans = this.child[i].findNode(el);
+							if(ans) return ans;
+						}
+					}
+				},
+				addNode:function(text , parentNode){
+				}
+			};
+			function addClass(el , cls){
+				var clsList = el.className.split(' ');
+				clsList.push(cls);
+				el.className = clsList.join(' ');
+			}
+			function delClass(el , cls){
+				var clsList = el.className.split(' ');
+				for(var i=0;i<clsList.length;i++){
+					if(clsList[i] == cls) {clsList.splice(i,1);break;}
+				}
+				el.className = clsList.join(' ');
+			}
+			function clsInEl(text , clsName){
+				var clsList = text.split(' ');
+				for(var i=0;i<clsList.length;i++){
+					if(clsList[i] == clsName) return true;
+				}
+				return false;
+			}
+			function bindEvent(){
+				var addBtn = document.getElementById('add');
+				var delBtn = document.getElementById('delete');
+				addBtn.addEventListener('click', function(e){
+					var inputTitleEl = document.getElementsByTagName('input')[0];
+					var inputTitle = inputTitleEl.value;
+					addNode(inputTitle,fatherNode.findNode(choseEl));
+					fatherNode.render(el);
+				}, false);
+				delBtn.addEventListener('click',function(e){
+					delNode(fatherNode.findNode(choseEl));
+				},false);
+			}
+			function addNode(text , parentNode){
+				var newNode = new nodeTreeItem(text , parentNode);
+				parentNode.addChild(newNode);
+				fatherNode.render(el);
+			}
+			function delNode(node){
+				node.delNode();
+				fatherNode.render(el);
+			}
+			function init(){
+				fatherNode = new nodeTreeItem('fatherNode');
+				el = document.getElementsByClassName('treeNodeContent')[0];
+				fatherNode.render(el);
+				bindEvent();
+			}
+			var fatherNode,el;
+			init();
+		</script>
+	</body>
+</html>

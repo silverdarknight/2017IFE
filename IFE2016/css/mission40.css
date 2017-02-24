@@ -1,0 +1,57 @@
+.container{
+	width:420px;
+	height:320px;
+	padding:10px;
+	border:solid 1px black;
+}
+
+.calender{
+	width:100%;
+	height:100%;
+}
+.calender_title{
+	display: flex;
+	flex-direction:row;
+	justify-content:space-around;
+	align-items:center;
+}
+.prevMonth{
+	width:0px;
+	height:0px;
+	border-top: solid 5px rgba(0,0,0,0) ;
+	border-right:solid 14px black;
+	border-bottom: solid 5px rgba(0,0,0,0) ;
+	border-left: none;
+}
+.nextMonth{
+	width:0px;
+	height:0px;
+	border-top: solid 5px rgba(0,0,0,0) ;
+	border-right: none;
+	border-bottom: solid 5px rgba(0,0,0,0) ;
+	border-left: solid 14px black;
+}
+.notCurrentMonth{
+	color:gray;
+}
+.currentDay{
+	background-color: blue;
+	color:white;
+	border:solid 3px black;
+}
+.calender_head,.calender_body{
+	display: flex;
+	flex-direction:row;
+	flex-wrap:nowrap;
+	justify-content:space-around;
+	align-items:center;
+}
+.calender_body div,.calender_head div{
+	width:10%;
+	padding:2% 0px;
+	text-align: center;
+	border:rgba(0,0,0,0) 3px solid;
+}
+.calender_body div:hover{
+	border:gray 3px solid;
+}

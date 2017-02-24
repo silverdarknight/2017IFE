@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			.container{
+				padding:20px 50px;
+				display: flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:flex-start;
+				align-items:flex-start;
+			}
+			.row{
+				width: 100%;
+				display: flex;
+				flex-direction:row;
+				flex-wrap:nowrap;
+				justify-content:space-between;
+				align-items:flex-start;
+			}
+			.inputArea{
+				flex-grow:1;
+				display: flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:space-between;
+				align-items:stretch;
+			}
+			.inputArea input{
+				font-size: 18px;
+				line-height: 20px;
+				border:solid 1px gray;
+				outline:none;
+				border-radius: 5px;
+				padding: 5px 10px;
+			}
+			.inputArea .errorMsg{
+				font-size: 14px;
+				color:gray;
+			}
+			.error input{
+				border: solid 1px red;
+			}
+			.error .errorMsg{
+				color:red;
+			}
+			.success input{
+				border: solid 1px green;
+			}
+			.success .errorMsg{
+				color:green;
+			}
+			.title{
+				width:100px;
+				text-align: right;
+				line-height: 32px;
+			}
+			.Btn{
+				font-size: 16px;
+				line-height: 18px;
+				padding:6px 20px;
+				border:solid 1px blue;
+				background-color: green;
+				border-radius: 5px;
+				outline: none;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<form action="" method=''>
+				<div class="row">
+					<span class="title">名称： </span>
+					<div class="inputArea">
+						<input type="text" id="name" onfocus="nameFocus('name')" onfocusout="checkName()"/>
+						<span class="errorMsg"></span>
+					</div>
+				</div>
+				<div class="row">
+					<span class="title">密码： </span>
+					<div class="inputArea">
+						<input type="password" id="pw" onfocus="nameFocus('pw')" onfocusout="checkPW()"/>
+						<span class="errorMsg"></span>
+					</div>
+				</div>
+				<div class="row">
+					<span class="title">密码确认： </span>
+					<div class="inputArea">
+						<input type="password" id="rePw" onfocus="nameFocus('rePw')" onfocusout="checkRePW()"/>
+						<span class="errorMsg"></span>
+					</div>
+				</div>
+				<div class="row">
+					<span class="title">邮箱： </span>
+					<div class="inputArea">
+						<input type="text" id="email" onfocus="nameFocus('email')" onfocusout="checkEmail()"/>
+						<span class="errorMsg"></span>
+					</div>
+				</div>
+				<div class="row">
+					<span class="title">手机： </span>
+					<div class="inputArea">
+						<input type="text" id="pn" onfocus="nameFocus('pn')" onfocusout="checkPN()"/>
+						<span class="errorMsg"></span>
+					</div>
+				</div>
+				<button class="Btn" onclick="submitBtn()">验证</button>
+			</form>
+		</div>
+		<script type="text/javascript">
+			var nameType = false,pwType=false,rePw=false,emailType=false,phoneumType=false;
+			function check(str){
+				var len=0,word = str.match(/[\u4e00-\u9fa5]+/g);
+				var wordEn = str.split(/[\u4e00-\u9fa5]+/g);
+				//console.log(word,wordEn);
+				if(word) for(var i=0;i<word.length;i++){
+					len += word[i].length*2;
+				}
+				if(wordEn) for(i=0;i<wordEn.length;i++){
+					len += wordEn[i].length;
+				}
+				//console.log(len);
+				if(len<4||len>16) return false;
+				return true
+			}
+			function matchEmail(str){
+				var re = /[0-9a-zA-Z]+@[0-9a-zA-Z]+.com/g;
+				return re.test(str);
+			}
+			function checkName(){
+				var inputEl = document.getElementById('name');
+				var inputAreaEl = inputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				var inputVal = inputEl.value;
+				if(check(inputVal)){
+					inputAreaEl.className = 'inputArea success';
+					msgEl.innerText = '名称格式正确';
+					nameType = true;
+				}
+				else{
+					inputAreaEl.className = 'inputArea error';
+					msgEl.innerText = '名称格式错误';
+					nameType = false;
+				}
+			} 
+			function checkPW(){
+				var inputEl = document.getElementById('pw');
+				var inputAreaEl = inputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				var inputVal = inputEl.value;
+				if(check(inputVal)){
+					inputAreaEl.className = 'inputArea success';
+					msgEl.innerText = '密码格式正确';
+					pwType = true;
+				}
+				else{
+					inputAreaEl.className = 'inputArea error';
+					msgEl.innerText = '密码格式错误';
+					pwType = false;
+				}
+			} 
+			function checkRePW(){
+				var inputEl = document.getElementById('pw');
+				var reInputEl = document.getElementById('rePw');
+				var inputAreaEl = reInputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				if(inputEl.value == reInputEl.value){
+					inputAreaEl.className = 'inputArea success';
+					msgEl.innerText = '密码相同';
+					rePw = true;
+				}
+				else{
+					inputAreaEl.className = 'inputArea error';
+					msgEl.innerText = '密码不同！！';
+					rePw = false;
+				}
+			} 
+			function checkEmail(){
+				var inputEl = document.getElementById('email');
+				var inputAreaEl = inputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				var inputVal = inputEl.value;
+				if(matchEmail(inputVal)){
+					inputAreaEl.className = 'inputArea success';
+					msgEl.innerText = '邮箱符合规范';
+					emailType = true;
+				}
+				else{
+					inputAreaEl.className = 'inputArea error';
+					msgEl.innerText = '邮箱不符合规范';
+					emailType = false;
+				}
+			}
+			function checkPN(){
+				//console.log('pn');
+				var inputEl = document.getElementById('pn');
+				var inputAreaEl = inputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				var inputVal = inputEl.value;
+				if(inputVal.length == 11){
+					inputAreaEl.className = 'inputArea success';
+					msgEl.innerText = '手机号符合规范';
+					phoneumType = true;
+				}
+				else{
+					inputAreaEl.className = 'inputArea error';
+					msgEl.innerText = '手机号不符合规范';
+					phoneumType = false;
+				}
+			}
+			function nameFocus(name){
+				var inputEl = document.getElementById(name);
+				var inputAreaEl = inputEl.parentNode;
+				var msgEl = inputAreaEl.childNodes[3];
+				switch (name){
+					case 'name':
+						msgEl.innerText = '请输入用户名，长度为4-16个字符';
+						break;
+					case 'pw':
+						msgEl.innerText = '请输入密码，长度为4-16个字符';
+						break;
+					case 'rePw':
+						msgEl.innerText = '请重新输入密码';
+						break;
+					case 'email':
+						msgEl.innerText = '请输入正确的E-mail';
+						break;
+					case 'pn':
+						msgEl.innerText = '请输入正确的电话号码';
+						break;
+				}
+			}
+			function submitBtn(){
+				if(nameType&&pwType&&rePw&&emailType&&phoneumType){
+					alert('success!');
+				}
+				else alert('error!');
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,111 @@
+.newArtical_contain{
+				width:80%;
+				border-radius: 3px;
+				margin:80px auto;
+				background-color: white;
+				box-shadow: 0px 2px 3px 2px gray;
+				color: #515151;
+				padding-bottom: 60px;
+			}
+			.newArtical_contain hr{
+				width: 90%;
+				height: 2px;
+				background-color: #CDC9C9;
+				margin:0px auto;
+			}
+			.newArtical_title{
+				height:100px;
+				line-height: 100px;
+				text-align: center;
+				font-size: 25px;
+				font-weight: bold;
+			}
+			.newArtical_questionList_title_must{
+				float: right;
+			}
+			.newArtical_questionList{
+				width: 80%;
+				margin:25px auto;
+			}
+			.newArtical_questionList ul{
+				padding:0px;
+				display: flex;
+				flex-direction:column;
+				flex-wrap:nowrap;
+				justify-content:space-between;
+				align-items:stretch;
+			}
+			.newArtical_questionList ul>li{
+				display: block;
+				padding:22px 25px;
+			}
+			.newArtical_questionList ul>li:hover{
+				background-color: #FFF5EE;
+			}
+			.newArtical_questionList_title{
+				margin-bottom: 20px;
+			}
+			.newArtical_questionList_title>span:first-child{
+				width:5%;
+				display: inline-block;
+			}
+			.newArtical_questionList_ansList{
+				padding-left: 5%;
+			}
+			.newArtical_questionList .newArtical_questionList_addQuestion{
+				display: flex;
+				flex-direction:column;
+				justify-content:center;
+				align-items:stretch;
+				background-color: #EEEEE0;
+			}
+			.newArtical_questionList .newArtical_questionList_addQuestion span{
+				padding-top:35px;
+				padding-bottom: 35px; 
+				text-align: center;
+			}
+			.newArtical_questionList_addQuestion_choseType{
+				height: 80px;
+				background-color: white;
+				display: flex;
+				flex-direction:row;
+				justify-content:center;
+				align-items:center;
+			}
+			.newArtical_questionList_addQuestion_choseType button{
+				margin:0px 15px;
+				padding:5px 25px;
+				border:solid gray 1px;
+				background-color: #EEEEE0;
+			}
+			.newArtical_footer{
+				margin-top: 30px;
+				padding:0px  15% ;
+				line-height: 38px;
+			}
+			.newArtical_questionList_footer>button{
+				float: right;
+				border:none;
+				background-color: rgba(0,0,0,0);
+			}
+			.newArtical_questionList_footer>button:hover{
+				color:red;
+			}
+			.newArtical_footer .stopTime{
+				float: left;
+			}
+			.newArtical_footer .stopTime>input{
+				height:38px;
+				width: 220px;
+				padding-left: 20px;
+			}
+			.newArtical_footer .newArtical_footer_btns{
+				float: right;
+			}
+			.newArtical_footer .newArtical_footer_btns>button{
+				background-color: white;
+				color:#7A7A7A;
+				padding: 5px 20px;
+				border:solid 1px #7A7A7A;
+				border-radius: 3px;
+			}
