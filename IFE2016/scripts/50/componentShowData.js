@@ -84,7 +84,10 @@ var componentShowData = function(){
 				for(j=0;j<queList[i]['data'].length;j++){
 					var showDataBar = $('<div class="showData_bar"></div>');
 					var showDataBarSpan = $('<span></span>');
-					showDataBarSpan.css('width',queList[i]['data'][j]+'%');
+					var dataAll = queList[i]['data'].reduce(function(acc,val){
+						return acc+val;
+					});
+					showDataBarSpan.css('width',Math.round(100*queList[i]['data'][j]/dataAll)+'%');
 					showDataBar.append(showDataBarSpan);
 					dataShowArea.append(showDataBar);
 				}

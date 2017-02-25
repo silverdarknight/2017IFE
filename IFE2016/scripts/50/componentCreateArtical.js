@@ -56,7 +56,8 @@ var questionItem = function(cfg,i){
 						'</div>'+
 						'<div class="newArtical_questionList_ansList">'+
 							'<div class="newArtical_questionList_ansList_input">'+
-							'<textarea name="question3" id="" cols="60" rows="10"></textarea>'+
+								'<textarea name="question3" id="" cols="60" rows="10"></textarea>'+
+							'</div>'+
 						'</div>'+
 						'<div class="newArtical_questionList_footer">'+
 							'<button class="newArtical_questionList_footer_moveTop">上移</button>'+
@@ -132,13 +133,20 @@ var componentCreateNewArtical = function(cfg,index){
 			var addBtn = $('<button class="add">添加</button>');
 			addBtnArea.append(addBtn);
 
+			function fakeData(len){
+				var ans = [];
+				for(var i=0;i<len;i++){
+					ans.push(Math.round(Math.random()*100));
+				}
+				return ans;
+			}
 			function singleAndManyBtnEvent(self,type,event){
 				//得到以空格做分隔符的几个参数 第一个是questions[title] 之后的是question[choses]
 				var questionCfg = $('.newArtical_questionList_addQuestion_choseType>div>input').val().split(' ');
 				var title = questionCfg.splice(0,1)[0];
 				var questionList = questionCfg;
 				//将title,type,questions存入this.cfg.questions
-				self.cfg['questions'].push({'type':type,'questionTitle':title,'choses':questionList});
+				self.cfg['questions'].push({'type':type,'questionTitle':title,'choses':questionList,'data':fakeData(questionList.length)});
 
 				//var nodeLi = questionItem({'type':type,'questionTitle':title,'choses':questionList},self.cfg['questions'].length);
 				//添加nodeLi到self.El.find('ul')
@@ -209,7 +217,7 @@ var componentCreateNewArtical = function(cfg,index){
 			var questionNum = self.cfg['questions'].length;
 			//上移
 			if(questionId!=1){
-				var delItem = self.cfg['questions'].splice(questionId-1,1);
+				var delItem = self.cfg['questions'].splice(questionId-1,1);debugger;
 				console.log(delItem);
 				self.cfg['questions'].splice(questionId-2,0,delItem[0]);
 				self.render();
@@ -246,9 +254,22 @@ var componentCreateNewArtical = function(cfg,index){
 			window.artical.show($('.container'));
 		});
 		this.El.find('.newArtical_footer_btns_inLineBtn').on('click',function(e){
-			self.cfg['state'] = 'inLine';
-			window.artical.req[self.El[0].dataset['artid']] = self.cfg;
-			window.artical.show($('.container'));
+			function render(){
+				self.cfg['stopTime'] = self.El.find('.calenderWithInput').val();
+				self.cfg['state'] = 'inLine';
+				if(self.El[0].dataset['artid'] == 'undefined') {
+					window.artical.req.push(self.cfg);
+				}
+				else{
+					window.artical.req[self.El[0].dataset['artid']] = self.cfg;
+				}
+				window.artical.show($('.container'));
+			}
+			var modelCfgOne = {'title':'提示','main':'是否发布问卷？<br/>(此问卷截至时期为'+self.cfg['stopTime']+')'};
+			var newModel = new componentModel(modelCfgOne,render);
+			newModel.show($('body'));
+				//render();
+				e.stopPropagation();
 		});
 	}
 	this.render = function(){
