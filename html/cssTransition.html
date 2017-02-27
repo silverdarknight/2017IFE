@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>linear-gradient()_CSS参考手册_web前端开发参考手册系列</title>
+<style>
+:root{
+	--opacity:0;
+}
+.container{
+	position: relative;
+	width:400px;
+	height: 200px;
+}
+.container>img{
+	position: absolute;
+	transition:all 0.5s;
+	top:0px;
+	left:0px;
+	width:100%;
+	height: 100%;
+	z-index: 1;
+	filter:blur(calc(5px*var(--opacity)));
+}
+.container>div{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	transition:all 0.5s;
+	opacity: var(--opacity);
+}
+.border_area{
+	margin:25px auto;
+	width:300px;
+	height:150px;
+	box-sizing:border-box;
+	border:none;
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+}
+.border_area>p{
+	display: inline-block;
+	margin:0px;
+	padding:0px;
+	font-size: 25px;
+	font-weight: bold;
+	position: relative;
+	transition:all 0.5s;
+	text-align: center;
+	top:calc( 50px*(1 - var(--opacity)) );
+	background: linear-gradient(90deg , red , blue 12.5%,red 25%, green 37.5%, red 50%, blue 62.5%,red 75%, green 87.5%, red);
+	background-size: 200% 100%;
+	-webkit-background-clip: text;
+	color:transparent;
+	animation: colorTran 2s infinite linear;
+}
+.top{
+	top:25px;
+	width:calc(300px * var(--opacity));
+	height:3px;
+	left:calc(50px + 75px * (1 - var(--opacity)));
+}
+.bot{
+	bottom:25px;
+	width:calc(300px * var(--opacity));
+	height:3px;
+	left:calc(50px + 75px * (1 - var(--opacity)));
+}
+.left{
+	width: 3px;
+	height:calc(150px * var(--opacity));
+	right:50px;
+	top:calc(25px + 75px * (1 - var(--opacity)));
+}
+.right{
+	width: 3px;
+	height:calc(150px * var(--opacity));
+	left:50px;
+	top:calc(25px + 75px * (1 - var(--opacity)));
+}
+hr{
+	position: absolute;
+	transition:all 1s;
+	border:0px;
+	margin:0px;
+	background-color: white;
+}
+@keyframes colorTran{
+	0%{
+		background-position: 0 0;
+	}
+	100%{
+		background-position: -100% 0;
+	}
+}
+</style>
+</head>
+	<body>
+		<div class="test3"></div>
+		<div class="container">
+			<img src="../img/articalImg.png">
+			<div>
+				<div class="border_area">
+					<p>this is title </p>
+					<p> title2</p>
+					<hr class="top">
+					<hr class="bot">
+					<hr class="left">
+					<hr class="right">
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			document.getElementsByClassName('container')[0].addEventListener('mouseover', function(e){
+				document.body.style.setProperty("--opacity", 1);
+			}, false);
+			document.getElementsByClassName('container')[0].addEventListener('mouseout', function(e){
+				document.body.style.setProperty("--opacity", 0);
+			}, false);
+		</script>
+	</body>
+</html>
