@@ -31,14 +31,36 @@
 	opacity: var(--opacity);
 }
 .border_area{
+	position: relative;
 	margin:25px auto;
 	width:300px;
 	height:150px;
-	box-sizing:border-box;
 	border:none;
 	display: flex;
 	flex-direction:column;
 	justify-content:center;
+}
+.border_area:before{
+	transition:all 1s;
+	position: absolute;
+	content:'';
+	height: 150px;
+	width:calc(100% * var(--opacity));
+	left:calc(50% * (1 - var(--opacity)));
+	border:none;
+	border-top: solid 3px white;
+	border-bottom: solid 3px white;
+}
+.border_area:after{
+	transition:all 1s;
+	position: absolute;
+	content:'';
+	height: calc(100% * var(--opacity));
+	width:100%;
+	top:calc(50% * (1 - var(--opacity)));
+	border:none;
+	border-left: solid 3px white;
+	border-right: solid 3px white;
 }
 .border_area>p{
 	display: inline-block;
@@ -55,37 +77,6 @@
 	-webkit-background-clip: text;
 	color:transparent;
 	animation: colorTran 2s infinite linear;
-}
-.top{
-	top:25px;
-	width:calc(300px * var(--opacity));
-	height:3px;
-	left:calc(50px + 75px * (1 - var(--opacity)));
-}
-.bot{
-	bottom:25px;
-	width:calc(300px * var(--opacity));
-	height:3px;
-	left:calc(50px + 75px * (1 - var(--opacity)));
-}
-.left{
-	width: 3px;
-	height:calc(150px * var(--opacity));
-	right:50px;
-	top:calc(25px + 75px * (1 - var(--opacity)));
-}
-.right{
-	width: 3px;
-	height:calc(150px * var(--opacity));
-	left:50px;
-	top:calc(25px + 75px * (1 - var(--opacity)));
-}
-hr{
-	position: absolute;
-	transition:all 1s;
-	border:0px;
-	margin:0px;
-	background-color: white;
 }
 @keyframes colorTran{
 	0%{
@@ -105,10 +96,6 @@ hr{
 				<div class="border_area">
 					<p>this is title </p>
 					<p> title2</p>
-					<hr class="top">
-					<hr class="bot">
-					<hr class="left">
-					<hr class="right">
 				</div>
 			</div>
 		</div>
