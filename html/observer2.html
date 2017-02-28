@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function Event(){
+				this.events = {};
+			}
+			Event.prototype = {
+				on:function(attr,callback){
+					if(this.events[attr]){
+						this.events[attr].push(callback);
+					}
+					else{
+						this.events[attr] = [callback];
+					}
+				},
+				emit:function(attr,...arg){
+					this.events[attr]&&this.events[attr].forEach(function(item){
+						item(...arg);
+					});
+				},
+			};
+			function observer(data){
+				this.data = data;
+				this.walk(data);
+				this.events = new Event();
+				_this = this;
+			}
+			observer.prototype = {
+				walk:function(data){
+					for(var key in data){
+						if(typeof data[key] == 'object') new observer(data[key]);
+						this.convert(key,data[key]);
+					}
+				},
+				convert:function(key,val){
+					Object.defineProperty(this.data,key,{
+						get:function(){
+							console.log('你访问了'+key);
+							return val;
+						},
+						set:function(newVal){
+							console.log('你设置了' + key);
+            				console.log('新的' + key + ' = ' + newVal);
+            				_this.events.emit(key,newVal);
+            				val = newVal;
+            				if(typeof newVal == 'object') new observer(newVal)
+						}
+					})
+				},
+				$watch:function(attr,callback){
+					_this.events.on(attr,callback);
+				}
+			};
+/*
+			let obj = {
+			 a: 1,
+			 b: 2,
+			 c: {
+			     d: 3,
+			     e: 4
+			 }
+			}
+			let obj2 = new observer(obj);
+			obj2.data.c.d;*/
+			let app1 = new observer({
+			    name: 'youngwind',
+			    age: 25
+			});
+
+			app1.data.name = {
+				lastName: 'liang',
+			    firstName: 'shaofeng'
+			};
+			app1.$watch('age',function(age){console.log(`我的年龄变了，现在是：${age}岁了`)});
+
+			app1.data.name.lastName;
+			// 这里还需要输出 '你访问了 lastName '
+			app1.data.name.firstName = 'lalala';
+			// 这里还需要输出 '你设置了firstName, 新的值为 lalala'
+			app1.data.age = 28;
+		</script>
+	</body>
+</html>
