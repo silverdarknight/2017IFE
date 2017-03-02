@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="keywords" content=""/>
+		<meta name="author" content="ZhangWeiJian"/>
+		<style type="text/css">
+			body{
+				margin:0px;
+				padding: 0px;
+			}
+			input{
+				display: none;
+			}
+			input:checked + label + div{
+				transition:all 0.5s;
+				max-height: 400px !important;
+				padding:20px 0;
+			}
+			.container{
+				display: flex;
+				flex-direction:column;
+				justify-content:flex-start;
+				align-items:flex-start;
+			}
+			.content{
+				width:400px;
+				background-color: #EDEDED;
+				border:solid 1px #D4D4D4;
+				border-radius: 3px;
+				margin:5px;
+				display: inline-block;
+				overflow: hidden;
+				display: flex;
+				flex-direction:column;
+				justify-content:flex-start;
+				align-items:stretch;
+			}
+			.content>label{
+				border-bottom: solid 1px #D4D4D4;
+				line-height: 40px;
+				padding-left: 16px;
+				cursor: pointer;
+			}
+			.content>.content_main{
+				transition:all 0.5s;
+				max-height:0px;
+				background-color: white;
+				padding-left: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="content">
+				<input type="radio" name="art" id="q1" ><label for="q1">title1</label>
+				<div class="content_main">
+					<p>sadfasdfsadfsafssafsd</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>sadfasdfsadfsafssafsd</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>sadfasdfsadfsafssafsd</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>sadfasdfsadfsafssafsd</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+					<p>asfasdsfdafas</p>
+				</div>
+			</div>
+			<div class="content">
+				<input type="radio" name="art" id="q2" ><label for="q2">title2</label>
+				<div class="content_main">sadfasdfsadfsafssafsd</div>
+			</div>
+			<div class="content">
+				<input type="radio" name="art" id="q3" ><label for="q3">title3</label>
+				<div class="content_main">sadfasdfsadfsafssafsd</div>
+			</div>
+		</div>
+		<!--script type="text/javascript" src="../scripts/jquery.js"></script-->
+	</body>
+</html>
